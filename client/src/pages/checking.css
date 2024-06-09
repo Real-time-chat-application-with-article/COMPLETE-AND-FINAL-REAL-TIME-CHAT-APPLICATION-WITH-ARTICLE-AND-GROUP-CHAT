@@ -1,0 +1,231 @@
+
+.checking
+{         
+        background-color:  #2873eb35;
+        backdrop-filter: blur(5px);
+        width: 100%;
+        height: 100vh;
+        padding: 0 30px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+}
+.checking .container.fade-out{
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    transition: 1s linear;
+}
+.checking .container
+{
+        width: 100%;
+        height: 550;
+        border-radius: 10px;
+        padding: 20px 40px;
+        opacity: 1;
+        display: flex;
+        margin-bottom: 5rem;
+        visibility: visible;
+        transition: 1s linear;
+}
+.checking .container.form{
+    display: block;
+        background: rgb(0, 0, 0, 0.6);
+        backdrop-filter: blur(20px);
+}
+.checking .container .head h3{
+       text-align: center;
+       font-size: 3rem;
+       margin-bottom: -10px;
+       width: 100%;
+       font-weight: bolder;
+       text-transform: uppercase;
+       color: purple;
+}
+
+.checking .container form label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    text-transform: capitalize;
+    padding-left: 0;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+    color: purple;
+    font-weight: 600;
+}
+
+.checking ion-icon{
+    position: absolute;
+    right: 8px;
+    font-size: 2rem;
+    color:purple;
+    line-height: 67px;
+    margin-top: 10px;
+}
+.passwordIcon:hover{
+    cursor: pointer;
+     color: rgb(55, 6, 55);
+}
+
+
+.checking .container form input{
+    width: 95%;
+    height: 100%;
+    color: white;
+    font-weight: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.3rem;
+    background-color: transparent;
+    border: none;
+    padding: 0 40px 0 10px;
+}
+
+.checking .container form button{
+    width: 100%;
+    background: purple;
+    font-size: 1.3rem; 
+    color: #FFF;
+    outline: none;
+    transition: 0.3s linear;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.checking .container form button:hover{
+        background: rgb(55, 6, 55);
+}
+
+.checking .container p{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.text-side{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.text-side h2{
+    font-size: 3rem;
+    text-align: center;
+    color: purple;
+    font-weight: 750;
+    margin-bottom: 20px;
+}
+.text-side span, .text-side p {
+    font-size: 1.7rem;
+    color: white;
+    text-align: center;
+}
+
+.text-side  b{
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.3s linear;
+}
+.text-side  b:hover{
+    background-color: rgb(55, 6, 55);
+}
+
+
+.error{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 25px;
+    text-transform: capitalize;
+    font-weight: 550;
+    font-size: 1.7rem;
+    color: red;
+    background: rgba(164, 9, 9, 0.166);
+}
+.msg{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 25px;
+    font-weight: 550;
+    color: white;
+    text-transform: capitalize;
+    font-size: 1.7rem;
+}
+
+.input-Box{
+    position: relative;
+    width: 100%;
+    height: 56px;
+    margin: 35px 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.input-Box input:focus~label,
+.input-Box input:valid~label{
+    top: -20px;
+    transition: .3s ease-in-out;
+}
+.form form span{
+    color: white;
+    transition: 0.3s linear;
+    text-align: right;
+    align-self: flex-end;
+    font-size: 1.5rem;
+    width: 100%;
+    font-weight: 550;
+}
+.form form span:hover{
+     text-decoration: underline;
+}
+
+.welcome{
+    display: flex;
+   position: relative;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome img{
+     width: 200px;
+     height: 200px;
+     position: relative;
+     object-fit: cover;
+     border-radius: 10px;
+}
+
+.welcome h1{
+     color:purple ;
+     text-align: center;
+     font-size: 3rem;
+     text-transform: uppercase;
+     font-weight: 770;
+}
+.logo-side{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: -30px;
+}
+.logo-side img{
+     width: 450px;
+     position: relative;
+}

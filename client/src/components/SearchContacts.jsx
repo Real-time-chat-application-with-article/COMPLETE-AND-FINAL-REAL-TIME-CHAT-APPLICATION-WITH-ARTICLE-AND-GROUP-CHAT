@@ -14,7 +14,7 @@ const SearchContacts = ({onClose}) => {
 
 
     const handleSearchUser = async()=>{
-        const URL = `${process.env.REACT_APP_BACKEND_URL}/api/search-user`
+        const URL = `http://192.168.156.157:8080/api/search-user`
         try {
             setLoading(true)
             const response = await axios.post(URL,{

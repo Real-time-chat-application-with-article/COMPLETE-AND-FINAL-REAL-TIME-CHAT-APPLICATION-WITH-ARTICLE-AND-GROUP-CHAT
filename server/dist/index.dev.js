@@ -18,7 +18,7 @@ var _require = require('./socket/index'),
 
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: "http://192.168.156.157:3000",
   credentials: true
 }));
 app.use(express.json());

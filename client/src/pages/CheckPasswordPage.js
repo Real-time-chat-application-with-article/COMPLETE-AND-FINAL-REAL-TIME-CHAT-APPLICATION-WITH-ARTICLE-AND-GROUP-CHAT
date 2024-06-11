@@ -45,7 +45,6 @@ const CheckPasswordPage = () => {
       navigate('/email')
     }
   },[])
-  console.log(location?.state?.name)
 
   const handleOnChange = (e)=>{
     const { name, value} = e.target
@@ -62,34 +61,34 @@ const CheckPasswordPage = () => {
     e.preventDefault()
     e.stopPropagation()
 
-    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/password`
+    const URL = `http://192.168.156.157:8080/api/password`
 
     try {
-        const response = await axios({
-          method :'post',
-          url : URL,
-          data : {
-            userId : location?.state?._id,
-            password : data.password
-          },
-          withCredentials : true
-        })
+      const response = await axios({
+        method :'post',
+        url : URL,
+        data : {
+          userId : location?.state?._id,
+          password : data.password
+        },
+        withCredentials : true
+      })
 
-         if(response.data.success){
-            dispatch(setToken(response?.data?.token))
-            localStorage.setItem('token',response?.data?.token)
+       if(response.data.success){
+          dispatch(setToken(response?.data?.token))
+          localStorage.setItem('token',response?.data?.token)
 
-            setData({
-              password : "",
-            })
-            navigate('/')
-        }
-    } catch (error) {
-      setErrorDisplay(error?.response?.data?.message)
-      setTimeout(() => {
-        setErrorDisplay("")
-      }, 4000);
-    }
+          setData({
+            password : "",
+          })
+          navigate('/')
+      }
+  } catch (error) {
+    setErrorDisplay(error?.response?.data?.message)
+    setTimeout(() => {
+      setErrorDisplay("")
+    }, 4000);
+  }
   }
 
   //============================================================================================

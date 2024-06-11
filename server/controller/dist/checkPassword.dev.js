@@ -8,6 +8,19 @@ var jwt = require('jsonwebtoken');
 
 var validator = require('validator');
 
+var LocalStorage = require("node-localstorage").LocalStorage;
+
+var localStorage = new LocalStorage('./scratch'); // Save the value to local storage
+
+var createToken = function createToken(_id) {
+  var jwtKey = process.env.JWT_SECREAT_KEY;
+  return jwt.sign({
+    _id: _id
+  }, jwtKey, {
+    expiresIn: '1d'
+  });
+};
+
 function checkPassword(request, response) {
   var _request$body, password, userId, user, verifyPassword, tokenData, token, cookieOptions;
 
@@ -62,9 +75,10 @@ function checkPassword(request, response) {
 
         case 15:
           token = _context.sent;
+          console.log("this is yoken 1\n", token);
           cookieOptions = {
-            http: true,
-            secure: true
+            http: false,
+            secure: false
           };
           return _context.abrupt("return", response.cookie('token', token, cookieOptions).status(200).json({
             message: "Login successfully",
@@ -72,20 +86,20 @@ function checkPassword(request, response) {
             success: true
           }));
 
-        case 20:
-          _context.prev = 20;
+        case 21:
+          _context.prev = 21;
           _context.t0 = _context["catch"](0);
           return _context.abrupt("return", response.status(500).json({
             message: _context.t0.message || _context.t0,
             error: true
           }));
 
-        case 23:
+        case 24:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 20]]);
+  }, null, null, [[0, 21]]);
 }
 
 module.exports = checkPassword;

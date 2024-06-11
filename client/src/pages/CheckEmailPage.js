@@ -57,7 +57,7 @@ const CheckEmailPage = () => {
     e.preventDefault()
     e.stopPropagation()
 
-    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/email`  //GENEARTING OUR BACKEND URL
+    const URL = `http://192.168.156.157:8080/api/email`  //GENEARTING OUR BACKEND URL
 
     try {
         const response = await axios.post(URL,data)  //COMMUNICATES WITH OUR BACKEND THROUGHT THIS URL

@@ -59,9 +59,9 @@ const Sidebar = () => {
                 setAllUser(conversationUserData)
             })
         }
-        else{
-            navigate("/email")
-        }
+       else{
+        navigate("/email")
+       }
         
     },[socketConnection,user])
 

@@ -88,7 +88,7 @@ useEffect(()=>{
                             return(
                                 <NavLink to={"/"+conv?.userDetails?._id} key={conv?._id} className='user-infomation'>
                                     <div>
-                                        <img src={conv?.userDetails?.profile_pic} alt={conv?.userDetails?.name}/>
+                                        <img src={conv?.userDetails?.profile_pic || default_img} alt={conv?.userDetails?.name}/>
                                         
                                     </div>
                                     <div>

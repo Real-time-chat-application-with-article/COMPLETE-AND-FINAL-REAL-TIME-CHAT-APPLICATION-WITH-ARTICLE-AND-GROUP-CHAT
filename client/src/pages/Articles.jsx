@@ -1,10 +1,13 @@
-/* src/components/Articles.jsx
+
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../fbconfig/fbase';
+import logo from '../images/logo1.png'
 //import { db } from '../fbconfig/fbase';
+import "./article.css"
 
 const Articles = () => {
   // Placeholder article data (replace with your actual data)
@@ -22,12 +25,9 @@ const Articles = () => {
 const navigate=useNavigate()
 const articleCollectionRef=collection(db,'articles')
 useEffect(()=>{
-  console.log('good night')
     const getProducts=async()=>{
         try{
-          console.log('working ....')
-         
-            const data=await getDocs(articleCollectionRef);
+           const data=await getDocs(articleCollectionRef);
             const filteredData=data.docs.map((doc)=>({
                 ...doc.data(),
                 id:doc.id,
@@ -63,81 +63,101 @@ const deleteProduct=async(id)=>{
   window.location.reload()
 
 }
+
+const Handle_Article = (id) =>{
+    // navigate(`/articles/${id}`)
+}
+
   return (
-    <>
+    <div className='Article-section'>
 <div style={{ 
     display:'flex',
     flexDirection:'row',
-    justifyContent:'space-around'
+    justifyContent:'space-around',
+    borderBottom:"4px solid rgb(255,255,255, 0.5)"
  }}>
- <FaArrowAltCircleLeft style={{ 
-    fontSize:'30px',
-    marginTop:'35px'
+    
+    <img className='logo' width={'250px'} 
+            src={logo}
+            alt='logo'
+          />
+ 
+ 
+  <div className='heading' style={{
+    display:'flex',
+    gap:"20px",
+  }}>
 
-}}
-onClick={()=>{
-    navigate(-1)
-}}
-  />
+<div className="icons" onClick={()=>{  navigate("/")}}>
+          <abbr title="My Chats">   <ion-icon  name="arrow-back" ></ion-icon> </abbr>
+  </div>
+
 <h3 style={{ 
     fontFamily:'monserif',
     textAlign:'center',
     padding:'30px',
-    fontSize:'26px',
+    fontSize:'2rem',
+    color:"white",
+    textTransform:"uppercase",
     fontWeight:'bold'
 
- }}>My Articles</h3>
- <button className="bg-green-500 p-2 text-white rounded" 
+ }}>User Articles</h3>
+
+</div>
+
+
+ <button className="add-button" 
  onClick={()=>{
-    navigate('/add-articles')
+    navigate('/add-article')
 }}
- style={{ 
-    height:'fit-content',
-    marginTop:'30px'
-  }}
+ 
   
- >Add new article</button>
+ > <ion-icon  name="add" ></ion-icon>Create an article</button>
  </div>
 
-    {art.map((ar)=>(<div key={ar.id} className="bg-gray-100" style={{ 
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'center',
-        flexWrap:'wrap',
-        gap:'20px',
-        padding:'20px'
-     }}>
-    
-      
-        <div
+<article className='article'>
+{art.map((ar)=>(
+            
+        <div key={ar.id}          
+          className="card" onClick={Handle_Article(ar.id)}>
           
-          className="bg-white p-4 rounded  shadow w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
+          <div className="icons" onClick={()=>deleteProduct(ar.id)}>
+          <abbr title="delete article">   <ion-icon  name="close" ></ion-icon> </abbr>
+        </div>
+        
+          <h2 className="text-xl font-semibold">{ar.Post_title}</h2>
 
-          style={{ 
-            height:"fit-content",
-            width:"35rem"
-           }}
-        >
-          <h2 className="text-xl font-semibold">{JSON.stringify(ar.title)}</h2>
-          <p className="text-gray-600"></p>
-          <p className="text-gray-500 mt-2">
-            Added by {JSON.stringify(ar.addedby)}
-          </p>
-     
-            <p>{JSON.stringify(ar.description)}</p>
-               <img
-            src={ar.image}
-            alt='nnnnnn'
+         
+     <div className='Article-Body'>
+        <img
+            src={ar.Post_image}
+            alt={ar.Post_image}
             className="mt-4 rounded"
           />
-          <div className="mt-4 flex space-x-2">
-            <button
-              // onClick={() => handleDeleteArticle(art.id)}
-              className="bg-red-500 text-white px-2 py-1 rounded"
-              onClick={()=>deleteProduct(ar.id)}
-            >
-              Delete
-            </button>
+          <div>
+               <p>{ar.Post_description}...</p>
+               <a href="#">see More...</a>
+          </div>
+         
+     </div>
+
+            <div className='bottom-side'>
+
+              <div className='side'>
+                  <img src={ar.profile_pic} alt="" />
+                  <div style={{display:"flex", flexDirection:"column"}}>
+                  <p className="text-gray-500 mt-2">
+                  {ar.postBy}
+                     </p>
+                     <p style={{color:"#ccc", fontWeight:"450"}} className="text-gray-500 mt-2">
+                  {ar.createdate}
+                   </p>
+                  </div>
+                  
+              </div>
+             
+            <div className="mt-4 flex space-x-2">
+            
             <button
               onClick={() => handleDeleteArticle(
                 
@@ -145,22 +165,20 @@ onClick={()=>{
                 )}
               className="bg-blue-500 text-white px-2 py-1 rounded"
             >
-              Edit
+              change
             </button>
-            <button
-              // onClick={() => handleDeleteArticle(art.id)}
-              className="bg-purple-500 text-white px-2 py-1 rounded"
-            >
-              Read more
-            </button>
-          
+            
           </div>
+              </div>   
+          
         </div>
       
     
-    </div>))}
-  </>
+    ))}
+</article>
+   
+  </div>
   );
 };
 
-export default Articles;*/
+export default Articles;

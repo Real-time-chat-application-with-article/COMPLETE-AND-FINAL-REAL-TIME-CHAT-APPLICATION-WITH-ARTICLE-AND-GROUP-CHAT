@@ -99,13 +99,13 @@ const [opacity, setOpacity] = useState(true);
     <div className='grid lg:grid-cols-[300px,1.5fr] h-screen max-h-screen Home'>
       <Loader
           color={"purple"}
-          loading={loading}
+          loading={false}
           cssOverride={override}
           size={100}
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-      <section className={`sidebar  ${!basePath && "hidden"} lg:block ${opacity ?  "disactive" : undefined }`}>
+      <section className={`sidebar  ${!basePath && "hidden"} lg:block`}>
         <Sidebar />
       </section>
 
@@ -114,7 +114,7 @@ const [opacity, setOpacity] = useState(true);
         <Outlet />
       </section>
 
-      <div className={`messageArea justify-center  items-center flex-col gap-2  ${!basePath ? "hiddens" : "lg:flex"}  ${opacity ?  "disactive" : undefined }`}>
+      <div className={`messageArea justify-center  items-center flex-col gap-2  ${!basePath ? "hiddens" : "lg:flex"}`}>
         <div>
           <img
             src={logo}

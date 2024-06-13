@@ -1,5 +1,5 @@
 .textArea{
-    width: 75vw;
+    width: 70vw;
     display: flex;
     flex-direction: column;
     background: transparent;
@@ -143,6 +143,22 @@
     background-color: rgb(55, 6, 55);
     cursor: pointer;
 }
+section.bottom button{
+    padding: 10px;
+    border-radius: 5px;
+    background: purple;
+    width: 10%;
+    color: white;
+    transition: 0.3s linear;
+}
+.group.bottom{
+    width: 100%;
+}
+
+section.bottom button:hover{
+   background-color: rgb(55, 6, 55);
+   cursor: pointer;
+}
 
 
 .receiver .msg-text{
@@ -219,7 +235,7 @@ color: purple;
     border-bottom-right-radius: 30px;
 }
 
-.imgaes{
+.sender .imgaes{
     width: 80px;
     height: 80px;
     border-radius: 50%;

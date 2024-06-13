@@ -1,13 +1,46 @@
 import axios from 'axios';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import React, { useState } from 'react';
 import { db, storage } from '../fbconfig/fbase';
 import {v4} from 'uuid'
 import { addDoc, collection } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useCallback , CSSProperties, useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { logout, setOnlineUser, setSocketConnection, setUser } from '../redux/userSlice'
+
 
 const AddArticles = () => {
 const navigate=useNavigate()
+const dispatch = useDispatch()
+const [username, setUserNmae] = useState("")
+const [profile_pic, setprofile_pic] = useState("")
+
+const fetchUserDetails = useCallback(async () => {
+    try {
+      const URL = `http://192.168.156.157:8080/api/user-details`
+      const response = await axios({
+        url: URL,
+        withCredentials: true
+      })
+
+     
+      dispatch(setUser(response.data.data))
+
+      if (response.data.data.logout) {
+        dispatch(logout())
+        navigate("/email")
+      }
+      console.log("current user Details", response)
+      setUserNmae(response.data.data.name)
+      setprofile_pic(response.data.data.profile_pic)
+    } catch (error) {
+      console.log("error", error)
+    }
+  }, [dispatch, navigate])
+  
+  useEffect(() => {
+    fetchUserDetails()
+  }, [fetchUserDetails])
 
     const addArticles=async(e)=>{
       e.preventDefault()
@@ -25,20 +58,21 @@ const navigate=useNavigate()
          const now = new Date();
          const formattedDateTime = now.toLocaleString(); 
  await addDoc(articleCollectionRef,{
-        addedby:"Deschanel",
-        createdat:formattedDateTime,
-        description:description1,
-        image:downloadUrlMainImg,
-        title:title1
+        postBy:username,
+        profile_pic: profile_pic,
+        createdate:formattedDateTime,
+        Post_description:description1,
+        Post_image:downloadUrlMainImg,
+        Post_title:title1
         
      })
-  
-     console.log('article data stored successfully, thank you')
-     navigate('/articles')
+     alert("Successfully posted")
+   navigate('/articles')
+
      }catch(err){
        
          console.log(err.message)
-        
+        alert(err.message)
      }
  }
 
@@ -52,38 +86,29 @@ const [imgDb,setImgDb]=useState('')
 
     
     return (
-        <div className='h-screen flex bg-gray-bg1'>
-            <div className='w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16'>
+        <div className='Add-Article'>
+           
+            <div className='content'>
                 <h1 className='text-2xl font-medium text-primary mt-4 mb-12 text-center'>
-                    Add Article
+                    Publish An Article
                 </h1>
-{imgDb}
+
                 <form onSubmit={addArticles}>
                     <div>
-                        <label htmlFor='email'>Title</label>
                         <input
                         name='title'
                             type='text'
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-                            id='email'
-                            placeholder='Your Email'
-
+                            id='title'
+                            placeholder='Your Title Here'
                             onChange={(e)=>setTitle1(e.target.value)}
                         />
                     </div>
-                    <div>
-                        <label htmlFor='password'>Description</label>
-                        <textarea
-                        onChange={(e)=>setDescription1(e.target.value)}
-                        name='desc'
-                            type='text'
-                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-                            id='password'
-                            placeholder='enter description'
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='pass'>image</label>
+
+                    <div style={{width:"100%" }}>
+                        <label className='post-img' htmlFor='pass'>
+                        <ion-icon  name="image-outline"></ion-icon>
+                            Add Image</label>
                         <input
                         onChange={(e)=>setImgUrl(e.target.files[0])}
                             type='file'
@@ -93,13 +118,22 @@ const [imgDb,setImgDb]=useState('')
                             placeholder='choose an image'
                         />
                     </div>
-
-                    <div className='flex justify-center items-center mt-6'>
+                    <div>
+                        <textarea
+                        onChange={(e)=>setDescription1(e.target.value)}
+                        name='desc'
+                            type='text'
+                            id='password'
+                            placeholder='Start writing here'
+                        />
+                    </div>
+                  
+                      <div style={{width:"100%"}}>
                       
-                        <button
-                            className="bg-green-500 p-2 text-white rounded" 
+                        <button type='submit' style={{width:"100%", color:"white",transition:"0.3s linear", background:"purple",padding:"20px 15px"}}
+                            className="button" 
                         >
-                            Add Article
+                            Publish
                         </button>
                     </div>
                 </form>

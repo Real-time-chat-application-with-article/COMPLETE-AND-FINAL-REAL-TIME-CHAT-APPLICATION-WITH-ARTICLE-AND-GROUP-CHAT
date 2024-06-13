@@ -6,6 +6,7 @@ const userDetails = require('../controller/userDetails')
 const logout = require('../controller/logout')
 const updateUserDetails = require('../controller/updateUserDetails')
 const searchUser = require('../controller/searchUser')
+const GroupAcessing = require('../controller/joinGroup')
 
 const router = express.Router()
 
@@ -24,5 +25,6 @@ router.post('/update-user',updateUserDetails)
 //search user
 router.post("/search-user",searchUser)
 
+router.post("/groupsignup", GroupAcessing)
 
 module.exports = router

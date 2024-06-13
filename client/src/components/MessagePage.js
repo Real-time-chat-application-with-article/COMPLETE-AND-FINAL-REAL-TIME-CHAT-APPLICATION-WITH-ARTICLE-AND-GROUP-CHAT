@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import Avatar from './Avatar'
+import profile_image from "../images/default.png"
 import { HiDotsVertical } from "react-icons/hi";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -132,7 +133,7 @@ const handleEmojis  = e =>{
     setMessage(preve => {
       return{
         ...preve,
-        text : value
+        text : value + emoji
       }
     })
   }
@@ -175,7 +176,7 @@ const handleEmojis  = e =>{
                       <Avatar
                         width={75}
                         height={75}
-                        imageUrl={dataUser?.profile_pic}
+                        imageUrl={dataUser?.profile_pic || profile_image}
                         name={dataUser?.name}
                         userId={dataUser?._id}
                       />
@@ -208,7 +209,7 @@ const handleEmojis  = e =>{
                         return(
                           <div className='flex gap-4'>
                              {
-                              user._id !== msg?.msgByUserId ? <img className='imgaes' src={dataUser?.profile_pic} />
+                              user._id !== msg?.msgByUserId ? <img className='imgaes' src={dataUser?.profile_pic || profile_image} />
                               :undefined
                              } 
 

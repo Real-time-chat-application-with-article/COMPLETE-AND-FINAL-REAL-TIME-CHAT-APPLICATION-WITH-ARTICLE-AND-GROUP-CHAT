@@ -9,7 +9,7 @@ import EditUserDetails from './EditUserDetails';
 import Divider from './Divider';
 import { FiArrowUpLeft } from "react-icons/fi";
 import SearchUser from './SearchUser';
-import { FaImage } from "react-icons/fa6";
+import { FaImage, FaPodcast } from "react-icons/fa6";
 import { FaVideo } from "react-icons/fa6";
 import { logout } from '../redux/userSlice';
 import "./sidebar.css"
@@ -59,9 +59,7 @@ const Sidebar = () => {
                 setAllUser(conversationUserData)
             })
         }
-       else{
-        navigate("/email")
-       }
+ 
         
     },[socketConnection,user])
 
@@ -75,11 +73,13 @@ const Sidebar = () => {
     }
 
     const [ClickState, setClickState] = useState("chat")
-    const [ActiveNabar, setActiveNavbar] = useState(<IndividualChat/>); 
+    const [ActiveNabar, setActiveNavbar] = useState(<IndividualChat/>);
+    const relocate = useNavigate(); 
     
     const ViewGroup = () =>{  
+        //relocate("/groupchat")
+        setClickState("group")  
         setActiveNavbar(<GroupChat/>) 
-        setClickState("group")   
     }
     const  ViewChat = () => {
         setActiveNavbar(<IndividualChat/>)
@@ -105,11 +105,14 @@ const Sidebar = () => {
         </div>
 
            <div className={`icons  ${ClickState === "contact" ? "active": undefined} `} onClick={ViewContact}>
-           <abbr title="My calls">  <ion-icon  name="people" ></ion-icon> </abbr> 
+           <abbr title="My calls">  <ion-icon  name="person-add" ></ion-icon> </abbr> 
            </div>
+          
            <div className="settings">
            <div className="icons">
-           <abbr title="Settings"onClick={()=>setOpenSearchUser(true)}>  <ion-icon  name="settings-sharp" ></ion-icon> </abbr>
+           <abbr title="create article"onClick={(e)=>{navigate('/articles')}}> 
+            <ion-icon  name="create" ></ion-icon>
+            </abbr>
            </div>
            </div>
 

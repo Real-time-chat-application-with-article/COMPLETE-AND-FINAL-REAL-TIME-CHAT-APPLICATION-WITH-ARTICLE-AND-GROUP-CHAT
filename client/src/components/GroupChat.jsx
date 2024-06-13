@@ -69,7 +69,11 @@ useEffect(()=>{
           />
          
                 </div>
-                <h2>Groups</h2>
+                <div className='head'>
+                       <h2>Groups</h2>
+                       <button>Create Group</button>
+                </div>
+                
                 <div className=' h-[calc(100vh-65px)] overflow-x-hidden overflow-y-auto scrollbar'>
                     {
                         allUser.length === 0 && (

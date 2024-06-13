@@ -9,9 +9,16 @@
 body{
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   background-position: center;
+  overflow-y: auto;
   background-size: cover;
   background-repeat: no-repeat;
    background-image: url('./images/pngtree-emoji-of-social-media-or-chat-application-network-emoticon-background-image_985694.jpg');
+}
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+.chatEngine{
+  background: url("./images/pngtree-emoji-of-social-media-or-chat-application-network-emoticon-background-image_985694.jpg");
 }

@@ -9,6 +9,7 @@ import logo from'../images/logo1.png'
 import Avatar from './Avatar'
 import './usersearchcard.css'
 import { Link } from 'react-router-dom'
+import default_img from "../images/default.png"
 
 const Contacts = ({ViewChat}) => {
     const [searchUser,setSearchUser] = useState([])
@@ -74,7 +75,7 @@ const Contacts = ({ViewChat}) => {
                             return(
                                 <Link to={"/"+user?._id} onClick={ViewChat}  className='user-infomation srch'>
                                 <div>
-                                    <img src={user?.profile_pic} alt={user?.name} />
+                                    <img src={user?.profile_pic || default_img} alt={user?.name} />
                                 </div>
                                 
                                 <div>
